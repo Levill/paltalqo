@@ -1,3 +1,4 @@
+<%@page import="accesodato.Coneccion"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -57,30 +58,19 @@
                                 <th>Acciones</th>
                             </thead>
                             <tbody>
-                                <%
-                                    Connection con=null;
-                                    String driver="com.mysql.jdbc.Driver";
-                                    String user="root";
-                                    String pass="";
-                                    String url="jdbc:mysql://localhost:3306/javaee";
-                                    try{
-                                        Class.forName(driver);
-                                        con=DriverManager.getConnection(url, user, pass);
-                                        Statement stmt=con.createStatement();
-                                        stmt.executeQuery("select  Usuarios.usuario_id,Usuarios.nombre,Usuarios.apepat,Usuarios.apemat,Ciudades.nombre as Ciudad from Usuarios,Ciudades where Usuarios.ciudad_id=Ciudades.ciudad_id and Usuarios.estado='activo'");
-                                        ResultSet rs=stmt.getResultSet();
-                                        while(rs.next()){
+                                <%       
+                                    Coneccion con=new Coneccion();
+                                    con.setConsulta("select  Usuarios.usuario_id,Usuarios.nombre,Usuarios.apepat,Usuarios.apemat,Ciudades.nombre as Ciudad from Usuarios,Ciudades where Usuarios.ciudad_id=Ciudades.ciudad_id and Usuarios.estado='activo'");
+                                        while(con.getResultado().next()){
                                             out.println("<tr>");
-                                                out.println("<td>"+rs.getString("usuario_id")+"</td>");
-                                                out.println("<td>"+rs.getString("nombre")+"</td>");
-                                                out.println("<td>"+rs.getString("apepat")+"</td>");
-                                                out.println("<td>"+rs.getString("apemat")+"</td>");
-                                                out.println("<td>"+rs.getString("ciudad")+"</td>");
+                                                out.println("<td>"+con.getResultado().getString("usuario_id")+"</td>");
+                                                out.println("<td>"+con.getResultado().getString("nombre")+"</td>");
+                                                out.println("<td>"+con.getResultado().getString("apepat")+"</td>");
+                                                out.println("<td>"+con.getResultado().getString("apemat")+"</td>");
+                                                out.println("<td>"+con.getResultado().getString("ciudad")+"</td>");
                                             out.println("</tr>");
                                         }
-                                    }catch(Exception ex){
-                                        out.println("Error de conexion!!"+ex.getMessage());
-                                    }
+                                    
                                 %>
                             </tbody>
                             
