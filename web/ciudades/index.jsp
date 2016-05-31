@@ -58,11 +58,14 @@
                             <tbody>
                                 <%      
                                       Coneccion con=new Coneccion();
-                                   con.setConsulta("select * from Ciudades");
+                                   con.setConsulta("select * from Ciudades where estado='activo'");
                                    while(con.getResultado().next()){
                                     out.println("<tr>");
                                        out.println("<td>"+con.getResultado().getString("ciudad_id")+"</td>");
                                        out.println("<td>"+con.getResultado().getString("nombre")+"</td>");
+                                       out.println("<td>"+"<a href='../ServletCiudad?eliminar="+con.getResultado().getString("ciudad_id")+"' class='btn btn-danger'>Eliminar</a>"+"</td>");
+                                       out.println("<td>"+"<a href='../editar.jsp?editar="+con.getResultado().getString("ciudad_id")+"' class='btn btn-danger'>Eliminar</a>"+"</td>");
+                                       
                                     out.println("</tr>");
                                    }
                                   

@@ -37,14 +37,14 @@
             <br><br><br>
             <div class="row">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Crear Ciudades</h3>
-                        <form class="form-inline">
+                    <div class="panel-body">
+                        <form method="POST" action="../ServletCiudad">
                             <div class="form-group">
-                                <label for="exampleInputName2">Nombre</label>
-                                <input type="text" class="form-control" id="exampleInputName2" placeholder="Punta Arenas">
-                            </div>                            
-                            <button type="submit" class="btn btn-default">AGREGAR</button>
+                                <label for="nombre">Nombre Ciudad</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresar Nombre">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-default">Guardar</button>
                         </form>
                     </div>
                     <div class="panel-body">

@@ -62,13 +62,16 @@
                                     Coneccion con=new Coneccion();
                                     con.setConsulta("select  Usuarios.usuario_id,Usuarios.nombre,Usuarios.apepat,Usuarios.apemat,Ciudades.nombre as Ciudad from Usuarios,Ciudades where Usuarios.ciudad_id=Ciudades.ciudad_id and Usuarios.estado='activo'");
                                         while(con.getResultado().next()){
-                                            out.println("<tr>");
+                                                out.println("<tr>");
                                                 out.println("<td>"+con.getResultado().getString("usuario_id")+"</td>");
                                                 out.println("<td>"+con.getResultado().getString("nombre")+"</td>");
                                                 out.println("<td>"+con.getResultado().getString("apepat")+"</td>");
                                                 out.println("<td>"+con.getResultado().getString("apemat")+"</td>");
                                                 out.println("<td>"+con.getResultado().getString("ciudad")+"</td>");
-                                            out.println("</tr>");
+                                                 out.println("<td>"+"<a href='../ServletUsuario?eliminar="+con.getResultado().getString("usuario_id")+"' class='btn btn-danger'>Eliminar</a>"+"</td>");
+                                                out.println("<td>"+"<a href='editar.jsp?editar="+con.getResultado().getString("usuario_id")+"' class='btn btn-green'>Editar</a>"+"</td>");
+
+                                                out.println("</tr>");
                                         }
                                     
                                 %>

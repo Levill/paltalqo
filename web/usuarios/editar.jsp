@@ -1,3 +1,4 @@
+<%@page import="accesodato.Coneccion"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,9 +26,10 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                       <li class="active"><a href="../index.jsp">Inicio</a></li>
+                        <li><a href="../usuarios/index.jsp">Usuarios</a></li>
+                        <li><a href="../ciudades/index.jsp">Ciudades</a></li>
+                        <li><a href="../reportes/index.jsp">Reportes</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -37,12 +39,37 @@
             <div class="row">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Editar Usuarios</h3>
+                        <h3 class="panel-title">Actualizar Usuarios</h3>
                     </div>
+                    <%
+                        int id=Integer.parseInt(request.getParameter("editar"));
+                        Coneccion con=new Coneccion();
+                        con.setConsulta("select * from Usuarios where usuario_id='"+id+"'");
+                        %>
                     <div class="panel-body">
+                        <%while(con.getResultado().next()){%>
                         
-                        
-
+                        <form method="POST" action="../ServletUsuario">
+                             <div class="form-group">
+                                 <label for="nombre">Nombre </label>
+                                 <input type="text" class="form-control" name="nombre" value='<%out.print(con.getResultado().getString("nombre")); %>' id="nombre" placeholder="Ingresar Nombre">
+                             </div>
+                              <div class="form-group">
+                                 <label for="nombre">1er Apellido</label>
+                                 <input type="text" class="form-control" name="apepat" value='<%out.print(con.getResultado().getString("apepat")); %>' id="nombre" placeholder="Ingresar Nombre">
+                             </div>
+                              <div class="form-group">
+                                 <label for="nombre">2do Apellido</label>
+                                 <input type="text" class="form-control" name="apemat" value='<%out.print(con.getResultado().getString("apemat")); %>' id="nombre" placeholder="Ingresar Nombre">
+                             </div>
+                              <div class="form-group">
+                                 <label for="nombre">Ciudad</label>
+                                <input type="text" class="form-control" name="ciudad_id" id="nombre" value='<%out.print(con.getResultado().getString("ciudad_id")); %>' placeholder="Ingresar Nombre">
+                            </div>
+                             
+                             <button type="submit" class="btn btn-default">Guardar</button>
+                         </form>
+                         <%}%>
                     </div>
                 </div>
             </div>
